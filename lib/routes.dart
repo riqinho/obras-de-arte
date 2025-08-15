@@ -29,3 +29,8 @@ class Routes {
     }
   }
 }
+
+// class ArtworkDetailsArguments {
+//   final Artwork artwork;
+//   ArtworkDetailsArguments(this.artwork);
+// }
