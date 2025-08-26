@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:obras_de_arte/data/settings_repository.dart';
 import 'package:obras_de_arte/routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,10 +14,19 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 3), () {
-      if (!mounted) return;
+    _navigate();
+  }
+
+  Future<void> _navigate() async {
+    await Future.delayed(const Duration(seconds: 3));
+    final repo = await SettingRepository.create();
+    final showIntro = await repo.getShowIntro();
+    if (!mounted) return;
+    if (showIntro) {
       Navigator.pushReplacementNamed(context, Routes.intro);
-    });
+    } else {
+      Navigator.pushReplacementNamed(context, Routes.home);
+    }
   }
 
   @override
